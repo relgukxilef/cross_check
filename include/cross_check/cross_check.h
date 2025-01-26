@@ -8,6 +8,7 @@ namespace cross_check {
         value_hash(const T &t) {
             hash = std::hash<T>()(t);
         }
+        value_hash(const char t[]) : value_hash(std::string_view(t)) {}
         value_hash(
             std::initializer_list<value_hash> values
         ) {

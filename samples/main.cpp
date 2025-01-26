@@ -8,10 +8,10 @@ struct my_object {};
 
 void foo(my_object &object) {
     cross_check::check(
-        {&object, "foo called"sv}, "no"sv, 
-        "foo should only be called once on the same object"sv
+        {&object, "foo called"}, "no", 
+        "foo should only be called once on the same object"
     );
-    cross_check::note({&object, "foo called"sv}, "yes"sv);
+    cross_check::note({&object, "foo called"}, "yes");
 }
 
 int main() {
