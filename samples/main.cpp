@@ -4,7 +4,13 @@
 
 using namespace std::string_view_literals;
 
-struct my_object {};
+struct my_object {
+    my_object();
+};
+
+my_object::my_object() {
+    cross_check::note({this, "foo called"}, "no");
+}
 
 void foo(my_object &object) {
     cross_check::check(
@@ -16,10 +22,7 @@ void foo(my_object &object) {
 
 int main() {
     my_object a, b;
-
     foo(a);
-
     foo(b);
-    
     foo(a);
 }

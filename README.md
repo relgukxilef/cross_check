@@ -7,6 +7,12 @@ Library to unintrusively add checks to functions.
 Let's say you have some class `my_object` and a function `foo` that should be called at most once per object. You don't want to or can't extend the class, but you'd still like to be able to check this constraint. Perhaps only in debug builds. With this library you could write `foo` like so:
 
 ```c++
+my_object::my_object() {
+    cross_check::note({this, "foo called"}, "no");
+
+    // Construct...
+}
+
 void foo(my_object &object) {
     cross_check::check(
         {&object, "foo called"}, "no", 
@@ -48,6 +54,6 @@ because of:
 4> ntdll!RtlUserThreadStart+0x21
 ```
 
-`note` adds a key-value pair to a map. `check` looks up a key and writes out a message and a stacktrace if it doesn't match the given value. Both key and value can be any object that can be hashed through `std::hash`, `const char[]` or an `std::initializer_list` of such objects. 
+`note` adds a key-value pair to a map. `check` looks up a key and writes out a message and a stacktrace if it doesn't match the given value. Both key and value can be any object that can be hashed through `std::hash`, `const char[]` or an `std::initializer_list` of such objects. If the key is absent in the map, check will pass.
 
 The library is thread-safe. It does not resize the map so there is a chance of false negatives. Further, it only stores and compares the hashes of keys and values so there is a small chance of false positives.
