@@ -9,4 +9,5 @@ build
 !*.cpp
 !*.h
 !*.txt
+!*.md
 !.gitignore
