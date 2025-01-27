@@ -7,6 +7,7 @@
 #include <shared_mutex>
 #include <spanstream>
 #include <stacktrace>
+#include <mutex>
 
 namespace cross_check {
     struct shared_mutex {
