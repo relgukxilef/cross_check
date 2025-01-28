@@ -23,7 +23,7 @@ namespace cross_check {
             assert(previous & 1);
         }
         bool try_lock_shared() {
-            if (!counters.fetch_add(2) & 1)
+            if (!(counters.fetch_add(2) & 1))
                 return true;
             counters.fetch_sub(2);
             return false;
