@@ -6,7 +6,9 @@
 #include <iostream>
 #include <shared_mutex>
 #include <spanstream>
+#if __cpp_lib_stacktrace
 #include <stacktrace>
+#endif
 #include <mutex>
 
 namespace cross_check {
