@@ -5,9 +5,13 @@ add_library(
 
 target_compile_features(CrossCheck PUBLIC cxx_std_23)
 
+target_compile_options(
+    CrossCheck PUBLIC
+    $<$<STREQUAL:${CMAKE_CXX_COMPILER_ID},Clang>:-no-pie>
+)
 target_link_options(
     CrossCheck PUBLIC
-    $<$<STREQUAL:CMAKE_CXX_COMPILER_ID,GNU>:-lstdc++_libbacktrace>
-    $<$<STREQUAL:CMAKE_CXX_COMPILER_ID,Clang>:
-        -lstdc++_libbacktrace -fsized-deallocation -no-pie>
+    $<$<STREQUAL:${CMAKE_CXX_COMPILER_ID},GNU>:-lstdc++_libbacktrace>
+    $<$<STREQUAL:${CMAKE_CXX_COMPILER_ID},Clang>:
+        -lstdc++_libbacktrace -fsized-deallocation>
 )
