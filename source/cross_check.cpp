@@ -55,7 +55,7 @@ namespace cross_check {
         bucket.value = value.hash;
         std::spanbuf context(bucket.context);
         std::ostream stream(&context);
-#ifdef __cpp_lib_stacktrace
+#if __cpp_lib_stacktrace
         stream << std::stacktrace::current(1);
 #endif
     }
@@ -78,7 +78,7 @@ namespace cross_check {
             return;
         std::cerr << 
             message << "\nin:\n" <<
-#ifdef __cpp_lib_stacktrace
+#if __cpp_lib_stacktrace
             std::stacktrace::current(1) << 
 #endif
             "\nbecause of:\n" << bucket.context << 
