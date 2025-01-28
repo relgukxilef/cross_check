@@ -6,7 +6,9 @@
 #include <iostream>
 #include <shared_mutex>
 #include <spanstream>
+#if __cpp_lib_stacktrace
 #include <stacktrace>
+#endif
 #include <mutex>
 
 namespace cross_check {
@@ -54,8 +56,10 @@ namespace cross_check {
         bucket.key = key.hash;
         bucket.value = value.hash;
         std::spanbuf context(bucket.context);
-        std::ostream stream(&context);  
+        std::ostream stream(&context);
+#if __cpp_lib_stacktrace
         stream << std::stacktrace::current(1);
+#endif
     }
 
     void check(
@@ -76,7 +80,9 @@ namespace cross_check {
             return;
         std::cerr << 
             message << "\nin:\n" <<
+#if __cpp_lib_stacktrace
             std::stacktrace::current(1) << 
+#endif
             "\nbecause of:\n" << bucket.context << 
             std::endl;
         return;

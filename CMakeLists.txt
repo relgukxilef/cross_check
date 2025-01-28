@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
+set(VERBOSE)
+
 project(CrossCheck CXX)
 
 add_subdirectory(source)
