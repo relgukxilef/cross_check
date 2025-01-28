@@ -8,5 +8,3 @@ target_include_directories(CrossCheck PUBLIC include)
 enable_testing()
 
 add_subdirectory(samples)
-
-target_compile_features(CrossCheck PUBLIC cxx_std_23)
